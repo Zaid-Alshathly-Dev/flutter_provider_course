@@ -1,29 +1,36 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Provider Course',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MyWidget(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Provider Course',
+//       theme: ThemeData(primarySwatch: Colors.blue),
+//       home: const Providers(),
+//     );
+//   }
+// }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+// class MyWidget extends StatefulWidget {
+//   const MyWidget({super.key});
 
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
+//   @override
+//   State<MyWidget> createState() => _MyWidgetState();
+// }
+
+// class _MyWidgetState extends State<MyWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(body: Center(child: Text('MyWidget placeholder')));
+//   }
+// }
 
 // // lesson-2
 // // (ChangeNotifierProvider And Consumer)
@@ -255,52 +262,390 @@ class MyWidget extends StatefulWidget {
 //   }
 // }
 
-// lesson-6
-// (provider of(context))
-class _MyWidgetState extends State<MyWidget> {
+// // lesson-6
+// // (provider of(context))
+// class _MyWidgetState extends State<MyWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => Model(),
+//       child: Scaffold(
+//         appBar: AppBar(title: const Text('Provider')),
+//         body: WidgetChild(),
+//       ),
+//     );
+//   }
+// }
+
+// class WidgetChild extends StatelessWidget {
+//   const WidgetChild({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     var model = Provider.of<Model>(context);
+
+//     return Container(
+//       child: Column(
+//         children: [
+//           Center(child: Text("${model.name}")),
+//           const SizedBox(height: 10),
+//           MaterialButton(
+//             color: Colors.blue,
+//             textColor: Colors.white,
+//             onPressed: () {
+//               model.ChangeName();
+//               print(model.name);
+//             },
+//             child: const Text('Do something'),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// class Model extends ChangeNotifier {
+//   String name = "Welcome";
+
+//   ChangeName() {
+//     name = "Zaid";
+//     notifyListeners();
+//   }
+// }
+
+// // lesson-7
+// // (context.watch() and context.read() )
+// class _MyWidgetState extends State<MyWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => Model(),
+//       child: Scaffold(
+//         appBar: AppBar(title: const Text('Provider')),
+//         body: WidgetChild(),
+//       ),
+//     );
+//   }
+// }
+
+// class WidgetChild extends StatelessWidget {
+//   const WidgetChild({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     // var model = Provider.of<Model>(context, listen: false);
+//     // var model = Provider.of<Model>(context, listen: true);
+
+//     return Container(
+//       child: Column(
+//         children: [
+//           // Center(child: Text("${context.read<Model>().name}")),
+//           Center(child: Text("${context.watch<Model>().name}")),
+//           const SizedBox(height: 10),
+//           MaterialButton(
+//             color: Colors.blue,
+//             textColor: Colors.white,
+//             onPressed: () {
+//               context.read<Model>().ChangeName();
+
+//             },
+//             // onPressed: () {
+//             //   model.ChangeName();
+//             //   print(model.name);
+//             // },
+//             child: const Text('Do something'),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// class Model extends ChangeNotifier {
+//   String name = "Welcome";
+
+//   ChangeName() {
+//     name = "Zaid";
+//     notifyListeners();
+//   }
+// }
+
+// // lesson-8
+// // (Provider vs ChangeNotifierProvider)
+// class Providers extends StatelessWidget {
+//   const Providers({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Providers')), // AppBar
+//       drawer: const Drawer(),
+//       // body: ChangeNotifierProvider<MyModel>(
+//       body: Provider<MyModel>(
+//         create: (context) {
+//           return MyModel();
+//         },
+//         child: Column(
+//           children: <Widget>[
+//             Container(
+//               child: Consumer<MyModel>(
+//                 builder: (context, myModel, child) {
+//                   // print(myModel.showsomthing);
+//                   return Text(myModel.showsomthing);
+//                 },
+//               ), // Consumer
+//             ), // Container
+
+//             Container(
+//               child: Consumer<MyModel>(
+//                 builder: (context, myModel, child) {
+//                   print(myModel.doSomthingone());
+//                   return ElevatedButton(
+//                     onPressed: () {
+//                       myModel.doSomthingone();
+//                     },
+//                     child: const Text('Do Something One'),
+//                   );
+//                 },
+//               ),
+//             ),
+
+//             Container(
+//               child: Consumer<MyModel>(
+//                 builder: (context, myModel, child) {
+//                   print(myModel.doSomthingtwo());
+//                   return ElevatedButton(
+//                     onPressed: () {
+//                       myModel.doSomthingtwo();
+//                     },
+//                     child: const Text('Do Something Two'),
+//                   );
+//                 },
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// // class MyModel with ChangeNotifier {
+// class MyModel {
+//   var showsomthing = "show something";
+//   doSomthingone() {
+//     showsomthing = "provider yes one";
+//     print(showsomthing);
+//     // notifyListeners();
+//   }
+
+//   doSomthingtwo() {
+//     showsomthing = "provider yes two";
+//     print(showsomthing);
+//     // notifyListeners();
+//   }
+// }
+
+// lesson-9
+// (MultiProvider)
+// class Providers extends StatelessWidget {
+//   const Providers({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Providers')), // AppBar
+//       drawer: const Drawer(),
+//       // body: ChangeNotifierProvider<MyModel>(
+//       body: MultiProvider(
+//         providers: [
+//           ChangeNotifierProvider(
+//             create: (context) {
+//               return MyModel();
+//             },
+//           ),
+
+//           Provider(
+//             create: (context) {
+//               return provOne();
+//             },
+//           ),
+//         ],
+//         child: Column(
+//           children: <Widget>[
+//             Container(
+//               child: Consumer<MyModel>(
+//                 builder: (context, myModel, child) {
+//                   return Text(myModel.showsomthing);
+//                 },
+//               ), // Consumer
+//             ),
+//             // Container
+//             Container(
+//               child: Consumer<provOne>(
+//                 builder: (context, prove, child) {
+//                   return Text(prove.name);
+//                 },
+//               ), // Consumer
+//             ),
+//             // Container
+//             // Container
+//             Container(
+//               child: Consumer<provOne>(
+//                 builder: (context, prove, child) {
+//                   return ElevatedButton(
+//                     onPressed: () {
+//                       prove.doSomthingprovone();
+//                     },
+//                     child: const Text('Do Something one'),
+//                   );
+//                 },
+//               ),
+//             ),
+//             Container(
+//               child: Consumer<MyModel>(
+//                 builder: (context, myModel, child) {
+//                   return ElevatedButton(
+//                     onPressed: () {
+//                       myModel.doSomthingtwo();
+//                     },
+//                     child: const Text('Do Something Two'),
+//                   );
+//                 },
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// // class MyModel with ChangeNotifier {
+// class MyModel with ChangeNotifier {
+//   var showsomthing = "show something";
+//   doSomthingone() {
+//     showsomthing = "provider yes one";
+//     print(showsomthing);
+//     notifyListeners();
+//   }
+
+//   doSomthingtwo() {
+//     showsomthing = "provider yes two";
+//     print(showsomthing);
+//     notifyListeners();
+//   }
+// }
+
+// class provOne {
+//   var name = "Zaid";
+//   doSomthingprovone() {
+//     name = "Alshathly";
+//     // notifyListeners();
+//   }
+// }
+
+// // lesson-10
+// // summary providers
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) {
+//         return provAll();
+//       },
+//       child: MaterialApp(
+//         title: 'Flutter Demo',
+//         theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+//         home: const MyHomePage(title: 'Flutter Demo Home Page'),
+//       ),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   const MyHomePage({super.key, required this.title});
+
+//   final String title;
+
+//   @override
+//   State<MyHomePage> createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   int _counter = 0;
+
+//   void _incrementCounter() {
+//     setState(() {
+//       _counter++;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+//         title: Text(widget.title),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: .center,
+//           children: [
+//             const Text('You have pushed the button this many times:'),
+//             Text(
+//               '$_counter',
+//               style: Theme.of(context).textTheme.headlineMedium,
+//             ),
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: _incrementCounter,
+//         tooltip: 'Increment',
+//         child: const Icon(Icons.add),
+//       ),
+//     );
+//   }
+// }
+
+// class provAll with ChangeNotifier {
+//   String name = "Zaid";
+// }
+
+// lesson-(11+12)
+// (add to card provider part 1 + add to card provider part 2)
+
+import 'package:flutter/material.dart';
+import 'package:flutter_provider_course/Home.dart';
+import 'package:provider/provider.dart';
+import 'model/cart.dart';
+
+void main() {
+  runApp(firstApp());
+}
+
+class firstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => Model(),
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Provider')),
-        body: WidgetChild(),
+      create: (context) {
+        return Cart();
+      },
+      child: MaterialApp(
+        debugShowMaterialGrid: false,
+        debugShowCheckedModeBanner: false,
+        title: "Smart Home",
+        home: Home(),
       ),
     );
-  }
-}
-
-class WidgetChild extends StatelessWidget {
-  const WidgetChild({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    var model = Provider.of<Model>(context);
-
-    return Container(
-      child: Column(
-        children: [
-          Center(child: Text("${model.name}")),
-          const SizedBox(height: 10),
-          MaterialButton(
-            color: Colors.blue,
-            textColor: Colors.white,
-            onPressed: () {
-              model.ChangeName();
-              print(model.name);
-            },
-            child: const Text('Do something'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Model extends ChangeNotifier {
-  String name = "Welcome";
-
-  ChangeName() {
-    name = "Zaid";
-    notifyListeners();  
   }
 }
